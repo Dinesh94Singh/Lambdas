@@ -41,7 +41,7 @@ class Employee {
 }
 
 interface UpperConcat {
-    public String upperAndConcat(String s1, String s2);
+    String upperAndConcat(String s1, String s2);
 }
 
 public class Main {

@@ -3,6 +3,7 @@ package com.company;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
+import java.util.function.Function;
 import java.util.function.IntPredicate;
 import java.util.function.Predicate;
 import java.util.function.Supplier;
@@ -59,6 +60,11 @@ public class YetAnotherMain {
             }
         });
 
+        employeeList.forEach(employee -> {
+            String lastName = employee.getName().substring(employee.getName().indexOf(' ')+1);
+            System.out.println("Last Name is "+lastName);
+        });
+
         IntPredicate intp = i-> i>15;
         IntPredicate intp2 = i-> i<100;
         System.out.println(intp.test(20));
@@ -69,6 +75,17 @@ public class YetAnotherMain {
         for(int i=0;i<10;i++){
             System.out.println(randomSupplier.get());
         }
+
+        // Curly braces are always required for this type.
+        Function<Employee, String> getLastName = (Employee employee) -> {
+            return employee.getName().substring(employee.getName().indexOf(' ') +1);
+        };
+        Function<Employee, String> getFirstName = (Employee employee) -> {
+          return employee.getName().substring(0,employee.getName().indexOf(' '));
+        };
+        String lastName = getLastName.apply(employeeList.get(1));
+        String firstName = getFirstName.apply(employeeList.get(1));
+        System.out.println(firstName + " " + lastName);
     }
 
     private static void printEmployeesByAge(List<Employee> employees,
